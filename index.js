@@ -69,7 +69,7 @@ app.post("/submit", async (req, res) => {
   } catch (error) {
     console.error("AXIOS ERROR:", error.message);
     res.render("index.ejs", {
-      dataError: "Too many requests. Please try again soon.",
+      dataError: "An error occured. Please try a different set of countries",
     });
   }
 });
@@ -118,7 +118,7 @@ function calculateProjections(country1, country2) {
             country1.projections[i].population;
           yearAndPopulations.country2Population =
             country2.projections[i].population;
-          year = country1.projections[i].year;
+          yearAndPopulations.year = country1.projections[i].year;
 
           return yearAndPopulations;
         }
@@ -147,7 +147,7 @@ function calculateProjections(country1, country2) {
             country1.projections[i].population;
           yearAndPopulations.country2Population =
             country2.projections[i].population;
-          year = country1.projections[i].year;
+          yearAndPopulations.year = country1.projections[i].year;
 
           return yearAndPopulations;
         }
