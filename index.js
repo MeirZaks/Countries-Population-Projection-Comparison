@@ -54,6 +54,15 @@ app.post("/submit", async (req, res) => {
 
     var yearAndPopulations = calculateProjections(country1, country2);
 
+    var bold1 = "";
+    var bold2 = "";
+    if (
+      yearAndPopulations.country1Population >
+      yearAndPopulations.country2Population
+    )
+      bold1 = "bold";
+    else bold2 = "bold";
+
     res.render("index.ejs", {
       countryArray: countriesJSON.countries,
       country1Population: yearAndPopulations.country1Population,
@@ -65,6 +74,9 @@ app.post("/submit", async (req, res) => {
 
       country1Flag: country1Obj.flag,
       country2Flag: country2Obj.flag,
+
+      bold1: bold1,
+      bold2: bold2,
     });
   } catch (error) {
     console.error("AXIOS ERROR:", error.message);
@@ -101,10 +113,12 @@ function calculateProjections(country1, country2) {
       100;
 
   var yearAndPopulations = {
-    country1Population: country1.projections[projectionAmount - 1].population,
-    country2Population: country2.projections[projectionAmount - 1].population,
+    country1Population: country1.projections[0].population,
+    country2Population: country2.projections[0].population,
     year: 2024,
   };
+
+  var hasSurpassed = false;
 
   switch (true) {
     case country1.projections[0].population <
@@ -114,6 +128,7 @@ function calculateProjections(country1, country2) {
           country1.projections[i].population >
           country2.projections[i].population
         ) {
+          hasSurpassed = true;
           yearAndPopulations.country1Population =
             country1.projections[i].population;
           yearAndPopulations.country2Population =
