@@ -1,0 +1,91 @@
+<%- include("partials/header.ejs") %>
+
+    <!--Display Comparison-->
+    <% if (locals.country1Name) { %>
+        <section>
+            <div class="container d-flex justify-content-between mt-3">
+                <div class="text-center">
+                    <img src='<%= country1Flag %>' alt='<%= country1Name %> flag' width="100px">
+                    <h3 class="text-center">
+                        <%= country1Name %>
+                    </h3>
+                </div>
+                <div class="d-flex flex-row justify-content-center align-items-center">
+                    <h6>
+                        <%= country1Population %>
+                    </h6>
+                    <h2 class="px-3">
+                        <%= year %>
+                    </h2>
+                    <h6>
+                        <%= country2Population %>
+                    </h6>
+                </div>
+
+                <div>
+                    <img src='<%= country2Flag %>' alt='<%= country2Name %> flag' width="100px">
+                    <h3 class="text-center">
+                        <%= country2Name %>
+                    </h3>
+                </div>
+            </div>
+        </section>
+        <% } %>
+
+            <!--Choose Countries-->
+            <% if (locals.dataError) { %>
+                <div class="container mt-3">
+                    <p class="text-center">
+                        <%= dataError %>
+                    </p>
+                </div>
+                <% } else { %>
+                    <section>
+                        <form action="/submit" method="POST">
+
+                            <div class="container d-flex justify-content-between mt-3">
+                                <div>
+                                    <label>Choose first country:</label>
+                                    <select name="SelectFirstCountry" id="firstSelection" class="rounded-pill">
+                                        <% for (var i=0; i < locals.countryArray.length; i++) { %>
+                                            <option value='<%= countryArray[i]["code"] %>'>
+                                                <%= countryArray[i]["name"] %>
+                                            </option>
+                                            <% } %>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label>Choose second country:</label>
+                                    <select name="SelectSecondCountry" id="secondSelection" class="rounded-pill">
+                                        <% for (var i=0; i < locals.countryArray.length; i++) { %>
+                                            <option value='<%= countryArray[i]["code"] %>'>
+                                                <%= countryArray[i]["name"] %>
+                                            </option>
+                                            <% } %>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <div class="d-flex justify-content-center">
+                                <input type="submit" value="submit" class="btn btn-dark rounded-pill mt-3">
+                            </div>
+
+                        </form>
+                    </section>
+                    <% } %>
+
+
+
+                        <% if (locals.error) { %>
+                            <div class="container">
+                                <p class="text-center">
+                                    <%= error %>
+                                </p>
+                            </div>
+                            <% } %>
+
+
+
+                                <%- include("partials/footer.ejs") %>
