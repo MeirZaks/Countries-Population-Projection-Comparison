@@ -9,7 +9,7 @@ h4 {
   width: 400px;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 960px) {
   .flag-size {
     width: 150px;
   }
