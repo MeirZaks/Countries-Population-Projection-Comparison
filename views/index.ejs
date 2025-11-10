@@ -17,10 +17,13 @@
                                     <img src='<%= country1Flag %>' alt='<%= locals.country1Name %> flag' width="400px">
                                     <% } %>
                                         <h3 class="text-center">
-                                            <%= locals.country1Name %>
+                                            <% if (locals.country1Name) {%>
+                                                <%= country1Name %>
+                                                    <% } else { %>
+                                                        Choose first country:
+                                                        <% } %>
                                         </h3>
 
-                                        <label>Choose first country:</label>
                                         <select name="SelectFirstCountry" id="firstSelection" class="rounded-pill">
                                             <% for (var i=0; i < locals.countryArray.length; i++) { %>
                                                 <option value='<%= countryArray[i]["code"] %>'>
@@ -44,16 +47,19 @@
                         </div>
 
                         <div>
-                            <div>
+                            <div class="text-center">
                                 <% if (locals.country1Flag) { %>
                                     <img src='<%= locals.country2Flag %>' alt='<%= locals.country2Name %> flag'
                                         width="400px">
                                     <% } %>
                                         <h3 class="text-center">
-                                            <%= locals.country2Name %>
+                                            <% if (locals.country2Name) {%>
+                                                <%= country2Name %>
+                                                    <% } else { %>
+                                                        Choose first country:
+                                                        <% } %>
                                         </h3>
 
-                                        <label>Choose second country:</label>
                                         <select name="SelectSecondCountry" id="secondSelection" class="rounded-pill">
                                             <% for (var i=0; i < locals.countryArray.length; i++) { %>
                                                 <option value='<%= countryArray[i]["code"] %>'>
