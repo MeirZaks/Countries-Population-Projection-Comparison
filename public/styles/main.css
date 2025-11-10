@@ -4,3 +4,17 @@ h1 {
 h4 {
   padding: 0;
 }
+
+.flag-size {
+  width: 400px;
+}
+
+@media (max-width: 720px) {
+  .flag-size {
+    width: 150px;
+  }
+
+  h4 {
+    size: 0.7rem;
+  }
+}
